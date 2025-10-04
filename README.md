@@ -1,2 +1,2 @@
-# currency-converter
+# Currency Converter
 A simple currency conversion tool
