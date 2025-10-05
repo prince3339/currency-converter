@@ -8,24 +8,15 @@ export interface InputWithDropdownProps {
   selectProps: SelectProps;
 }
 
-const InputWithDropdown = ({ inputProps, selectProps }: InputWithDropdownProps) => {
-  const { label: inputLabel, placeholder, onChange: onInputChange, type } = inputProps;
-  const { label: selectLabel, options, onChange: onSelectChange } = selectProps;
-  return (
-    <div className='flex gap-2'>
-      <Input
-        type={type}
-        label={inputLabel}
-        placeholder={placeholder}
-        onChange={onInputChange}
-      />
-      <Select
-        label={selectLabel}
-        options={options}
-        onChange={onSelectChange}
-      />
-    </div>
-  );
-};
+const InputWithDropdown = ({ inputProps, selectProps }: InputWithDropdownProps) => (
+  <div className='flex gap-2'>
+    <Input
+      {...inputProps}
+    />
+    <Select
+      {...selectProps}
+    />
+  </div>
+)
 
 export default InputWithDropdown;
