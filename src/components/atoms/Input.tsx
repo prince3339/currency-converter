@@ -5,14 +5,16 @@ export interface InputFieldProps {
   placeholder?: string;
   onChange?: (value: string) => void;
   type: string;
+  isRequired?: boolean;
 }
 
-const InputField = ({ label, placeholder, onChange, type }: InputFieldProps) => (
+const InputField = ({ label, placeholder, onChange, type, isRequired }: InputFieldProps) => (
   <TextField aria-label='input-field'>
     {label && <Label>{label}</Label>}
     <Input
       type={type}
       placeholder={placeholder}
+      required={isRequired}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         onChange?.(e.target.value)
       }
