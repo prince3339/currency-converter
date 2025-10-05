@@ -1,2 +1,4 @@
-# Currency Converter
-A simple currency conversion tool
+# Currency Converter App
+
+It's a simple currency conversion application!
+
