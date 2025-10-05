@@ -1,18 +1,19 @@
-import {Button, Label, ListBox, ListBoxItem, Popover, Select, SelectValue} from 'react-aria-components';
+import { Button, Label, ListBox, ListBoxItem, Popover, Select, SelectValue } from 'react-aria-components';
 import {ChevronDown} from 'lucide-react';
 
-type Option = {
+export type Option = {
   name: string;
   value: string;
 }
 
-interface SelectProps {
+export interface SelectProps {
   label: string;
   options: Option[];
+  onChange?: (value: string | null) => void;
 }
 
-const EnhancedSelect = ({ label, options } : SelectProps) => (
-  <Select>
+const EnhancedSelect = ({ label, options, onChange } : SelectProps) => (
+  <Select onChange={(key) => onChange?.(key as string)} >
     <Label>{label}</Label>
     <Button>
       <SelectValue />

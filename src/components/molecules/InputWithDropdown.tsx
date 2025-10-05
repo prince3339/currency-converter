@@ -1,17 +1,28 @@
 import Input from '../atoms/Input';
 import Select from '../atoms/Select';
+import type { InputFieldProps } from '../atoms/Input';
+import type { SelectProps } from '../atoms/Select';
 
-const InputWithDropdown = () => {
+export interface InputWithDropdownProps {
+  inputProps: InputFieldProps;
+  selectProps: SelectProps;
+}
+
+const InputWithDropdown = ({ inputProps, selectProps }: InputWithDropdownProps) => {
+  const { label: inputLabel, placeholder, onChange: onInputChange, type } = inputProps;
+  const { label: selectLabel, options, onChange: onSelectChange } = selectProps;
   return (
-    <div>
+    <div className='flex gap-2'>
       <Input
-        label="Amount"
-        placeholder="Enter amount"
-        onChange={(value) => console.log(value)}
+        type={type}
+        label={inputLabel}
+        placeholder={placeholder}
+        onChange={onInputChange}
       />
       <Select
-        label="Currency"
-        options={[{ name: 'USD', value: 'usd' }, { name: 'EUR', value: 'eur' }]}
+        label={selectLabel}
+        options={options}
+        onChange={onSelectChange}
       />
     </div>
   );

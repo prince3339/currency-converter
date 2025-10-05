@@ -1,9 +1,10 @@
-import {TextField, Label, Input} from 'react-aria-components';
+import { TextField, Label, Input } from 'react-aria-components';
 
-interface InputFieldProps {
-  label: string;
+export interface InputFieldProps {
+  label?: string;
   placeholder?: string;
   onChange?: (value: string) => void;
+  type: string;
 }
 
 const InputField = ({ label, placeholder, onChange }: InputFieldProps) => (
