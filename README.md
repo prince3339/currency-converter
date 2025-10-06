@@ -17,6 +17,7 @@ Follow these steps to run the project locally:
   ```bash
   VITE_CURRENCY_BEACON_BASE_URL=<your-base-url> (Will be shared seperately)
   VITE_CURRENCY_BEACON_API_KEY=<your-api-key> (Will be shared seperately)
+ ```
 
 3. npm install
 
