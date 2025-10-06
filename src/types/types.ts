@@ -18,6 +18,15 @@ export type Currency = {
   thousands_separator: string;
 };
 
+export type ConvertedCurrency = {
+  amount: number;
+  date: string;
+  from: string;
+  timestamp: string;
+  to: string;
+  value: number;
+};
+
 export type CurrencyMetaData = {
   code: number;
   disclaimer: string;
@@ -27,4 +36,16 @@ export interface CurrencyApiResponse {
   [key: string]: Currency | CurrencyMetaData | Currency[];
   meta: CurrencyMetaData;
   response: Currency[];
+}
+
+export interface ConvertedCurrencyApiResponse {
+  [key: string]: ConvertedCurrency | CurrencyMetaData | Currency[];
+  meta: CurrencyMetaData;
+  response: ConvertedCurrency;
+}
+
+export type Conversion = {
+  from?: string;
+  to?: string;
+  amount?: number;
 }

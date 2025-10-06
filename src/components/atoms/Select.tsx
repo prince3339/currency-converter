@@ -8,14 +8,18 @@ export interface SelectProps<T extends BaseOption = BaseOption> {
   onChange?: (value: string | null, option?: T) => void;
   placeholder?: string;
   isRequired?: boolean;
+  value?: string | null;
+  defaultValue?: string | null;
 }
 
-const EnhancedSelect = <T extends BaseOption>({ label, options, onChange, placeholder, isRequired } : SelectProps<T>) => (
+const EnhancedSelect = <T extends BaseOption>({ label, options, onChange, placeholder, isRequired, value, defaultValue } : SelectProps<T>) => (
   <Select
     aria-label='select'
     onChange={(key) => onChange?.(key as string)}
     placeholder={placeholder}
     isRequired={isRequired}
+    value={value}
+    defaultValue={defaultValue}
     >
     {label && <Label>{label}</Label>}
     <Button
