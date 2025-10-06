@@ -13,8 +13,10 @@ Follow these steps to run the project locally:
    git clone git@github.com:prince3339/currency-converter.git
    cd currency-converter
 
-2. VITE_CURRENCY_BEACON_BASE_URL=<your-base-url> (Will be shared seperately)
-   VITE_CURRENCY_BEACON_API_KEY=<your-api-key> (Will be shared seperately)
+2. Create a .env file and add the following vars
+  ```bash
+  VITE_CURRENCY_BEACON_BASE_URL=<your-base-url> (Will be shared seperately)
+  VITE_CURRENCY_BEACON_API_KEY=<your-api-key> (Will be shared seperately)
 
 3. npm install
 
