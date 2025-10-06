@@ -10,8 +10,6 @@ export const fetcher = async <T>(
 
   const res = await fetch(apiUrl.toString(), init);
 
-  console.log("Fetching URL:", apiUrl.toString());
-
   if (!res.ok) {
     throw new Error(`Fetch error: ${res.status} ${res.statusText}`);
   }
