@@ -49,3 +49,14 @@ export type Conversion = {
   to?: string;
   amount?: number;
 }
+
+export type ConversionStorageDataType = {
+  fromCurrency: string;
+  toCurrency: string;
+  fromAmount: number;
+  toAmount: number;
+}
+
+export type conversionParamType = {
+  fromAmount?: number, toAmount?: number
+}

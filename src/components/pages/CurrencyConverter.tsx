@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import InputWithDropdown from '../molecules/InputWithDropdown';
 import { useCurrencies, useCurrencyConversion, useDebouncedValue } from '../../hooks/currencyHooks';
-import type { ConvertedCurrency, CurrencyType } from '../../types/types';
+import type { ConvertedCurrency, CurrencyType, ConversionStorageDataType, conversionParamType } from '../../types/types';
 
 const CurrencyConverter = () => {
   const [fromAmount, setFromAmount] = useState<number | null>(null);
@@ -11,8 +11,28 @@ const CurrencyConverter = () => {
   const [lastChangedField, setLastChangedField] = useState<'from' | 'to' | null>(null);
   const debouncedFromAmount = useDebouncedValue(fromAmount, 300);
   const debouncedToAmount = useDebouncedValue(toAmount, 300);
+  const [conversionList, setConversionList] = useState<ConversionStorageDataType[]>([])
   const { data: currencies, error, isLoading } = useCurrencies('FLAT' as CurrencyType);
   const isFromChanged = lastChangedField === 'from';
+
+  const displayedConversions = conversionList?.slice(0, 5)
+
+  const handleStoreConversion = ({
+    fromAmount: updatedFromAmount,
+    toAmount: updatedToAmount
+  }: conversionParamType) => {
+    const data: ConversionStorageDataType = {
+      fromCurrency,
+      toCurrency,
+      fromAmount: updatedFromAmount || fromAmount,
+      toAmount: updatedToAmount || toAmount
+    } as ConversionStorageDataType
+  
+    const updatedConversions = [data, ...conversionList]
+    console.log(toAmount, 'conversionStorage')
+
+    setConversionList(updatedConversions)
+  }
 
   const apiPayload = useMemo(() => {
     if (!fromCurrency || !toCurrency) return null;
@@ -40,9 +60,18 @@ const CurrencyConverter = () => {
     if (!convertedCurrency) return;
 
     const value = (convertedCurrency.response as ConvertedCurrency).value;
+    const payload: conversionParamType = {};
 
-    if (isFromChanged) setToAmount(value);
-    else setFromAmount(value);
+    if (isFromChanged) {
+      setToAmount(value);
+      payload.toAmount = value
+    }
+    else {
+      setFromAmount(value);
+      payload.fromAmount = value
+    }
+    
+    handleStoreConversion(payload)
   }, [convertedCurrency, isFromChanged]);
 
   const currencyList = useMemo(() => {
@@ -127,6 +156,34 @@ const CurrencyConverter = () => {
           />
         </div>
       </div>
+
+      <ul className='mt-8'>
+        {displayedConversions?.map(conversion => {
+          return (
+            <li className='flex gap-8 p-2'>
+              <div>
+                From
+                <span className='block'>
+                  {conversion.fromCurrency}
+                </span>
+                <span>
+                  {conversion.fromAmount}
+                </span>
+              </div>
+
+              <div>
+                To
+                <span className='block'>
+                  {conversion.toCurrency}
+                </span>
+                <span>
+                  {conversion.toAmount}
+                </span>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
     </div>
   );
 }
